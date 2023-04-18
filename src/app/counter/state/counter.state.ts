@@ -1,6 +1,8 @@
 export interface counterState{
-    counter:0
+    counter:number,
+    userName:string
 }
 export const initialState={
-    counter:0
+    counter:0,
+    userName:"Ousama FakherEldine"
 }
