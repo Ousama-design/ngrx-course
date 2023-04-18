@@ -22,8 +22,9 @@ export class CounterOutputComponent implements OnInit,OnDestroy{
     .subscribe((data)=>{
 	this.counter=data.counter;})
 
-  this.counter$=this.store.select('counter');
-	}
+  //this.counter$=this.store.select('counter');
+  //https://youtu.be/FWnv2YbCSlE
+}
 
   ngOnDestroy(): void {
     if(this.counterSubscription){
