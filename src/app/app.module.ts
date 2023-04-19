@@ -6,13 +6,14 @@ import { CounterOutputComponent } from './counter/counter-output/counter-output.
 import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
 import {StoreModule} from "@ngrx/store";
 import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { PostListsComponent } from './posts/post-lists/post-lists.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
+import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,13 @@ import { appReducer } from './store/app.state';
     CustomCounterInputComponent,
     HomeComponent,
     HeaderComponent,
-    PostListsComponent
+    PostListsComponent,
+    AddPostsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
