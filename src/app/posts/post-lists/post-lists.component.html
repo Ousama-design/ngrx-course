@@ -1,1 +1,21 @@
-<p>post-lists works!</p>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Posts List</h3>
+        <table class="table table-striped" *ngIf="posts | async as postsData">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let post of postsData"> 
+                        <th>{{post.id}}</th>
+                        <th>{{post.title}}</th>
+                        <th>{{post.description}}</th>
+                    </tr>
+                </tbody>
+        </table>
+    </div>
+</div>
