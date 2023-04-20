@@ -3,20 +3,24 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter/counter.component';
-import {PostListsComponent} from './posts/post-lists/post-lists.component';
+import { PostListsComponent } from './posts/post-lists/post-lists.component';
 import { AddPostsComponent } from './posts/add-posts/add-posts.component';
+import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
 
-const routes:Routes=[
+const routes: Routes = [
   {
-    path:'',component:HomeComponent
+    path: '', component: HomeComponent
   },
   {
-    path:'counter',component:CounterComponent
+    path: 'counter', component: CounterComponent
   },
   {
-    path:'posts',
-    component:PostListsComponent,
-    children:[{path:'add',component:AddPostsComponent}]
+    path: 'posts',
+    component: PostListsComponent,
+    children: [
+      { path: 'add', component: AddPostsComponent },
+      { path: 'edit/:id', component: EditPostsComponent }
+    ]
   }
 ];
 
@@ -26,7 +30,7 @@ const routes:Routes=[
     CommonModule,
     RouterModule.forRoot(routes)
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
