@@ -6,6 +6,7 @@ import { getPostById } from '../state/posts.selector';
 import { Post } from 'src/app/models/posts.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { updatePost } from '../state/posts.actions';
 
 @Component({
   selector: 'app-edit-posts',
@@ -40,7 +41,21 @@ export class EditPostsComponent implements OnInit,OnDestroy {
   }
 
   onUpdatePost(){
-      
+      if(!this.postForm.valid){
+        return;
+      }
+
+      const title=this.postForm.value.title;
+      const description=this.postForm.value.description;
+
+      const post:Post={
+        id:this.post.id,
+        title,
+        description
+      }
+
+      this.store.dispatch(updatePost({post}));
+
   }
 
   createForm(){
