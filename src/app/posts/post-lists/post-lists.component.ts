@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Post } from 'src/app/models/posts.model';
 import { appState } from 'src/app/store/app.state';
 import { getPosts } from '../state/posts.selector';
+import { deletePost } from '../state/posts.actions';
 
 @Component({
   selector: 'app-post-lists',
@@ -24,5 +25,11 @@ export class PostListsComponent implements OnInit {
       //     console.log(postData);
       //     this.postData=postData;
       // })
+    }
+
+    onDeletePost(id?:string){
+        if(confirm("Are you sure you want to delete")){
+            this.store.dispatch(deletePost({id}))
+        }
     }
 }

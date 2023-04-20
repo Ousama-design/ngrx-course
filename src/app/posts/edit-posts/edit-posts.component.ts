@@ -1,5 +1,5 @@
 import { Component,OnInit,OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { appState } from 'src/app/store/app.state';
 import { getPostById } from '../state/posts.selector';
@@ -19,7 +19,7 @@ export class EditPostsComponent implements OnInit,OnDestroy {
   postForm!:FormGroup;
   postSubscription!:Subscription;
   
-  constructor(private route:ActivatedRoute,private store:Store<appState>){
+  constructor(private route:ActivatedRoute,private store:Store<appState>,private router:Router){
 
   }
 
@@ -55,7 +55,7 @@ export class EditPostsComponent implements OnInit,OnDestroy {
       }
 
       this.store.dispatch(updatePost({post}));
-
+      this.router.navigate(['posts']);
   }
 
   createForm(){
