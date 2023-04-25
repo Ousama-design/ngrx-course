@@ -3,6 +3,7 @@ import {Store} from "@ngrx/store";
 import { Observable, Subscription } from 'rxjs';
 import { getCounter } from '../state/counter.selectors';
 import { appState } from 'src/app/store/app.state';
+import { ApiService } from 'src/app/http/api.service';
 
 @Component({
   selector: 'app-counter-output',
@@ -14,7 +15,7 @@ export class CounterOutputComponent implements OnInit,OnDestroy{
   counter:number=0;
   counterSubscription!:Subscription;
   //counter$?:Observable<{counter:number}>
-  constructor(private store:Store<appState>){
+  constructor(private store:Store<appState>, private api:ApiService){
   }  
 
   ngOnInit(){
@@ -32,5 +33,21 @@ export class CounterOutputComponent implements OnInit,OnDestroy{
     if(this.counterSubscription){
       this.counterSubscription.unsubscribe();
     }
+  }
+
+  get401(){
+    this.api.get401().subscribe();
+  }
+
+  get403(){
+    this.api.get403().subscribe();
+  }
+
+  get404(){
+    this.api.get404().subscribe();
+  }
+
+  get503(){
+    this.api.get503().subscribe();
   }
 }

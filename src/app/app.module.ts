@@ -1,11 +1,7 @@
 import { NgModule,isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
-import { CounterComponent } from './counter/counter/counter.component';
-import { CounterOutputComponent } from './counter/counter-output/counter-output.component';
-import { CounterButtonsComponent } from './counter/counter-buttons/counter-buttons.component';
 import {StoreModule} from "@ngrx/store";
-import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,14 +11,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducer } from './store/app.state';
 import { AddPostsComponent } from './posts/add-posts/add-posts.component';
 import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CounterComponent,
-    CounterOutputComponent,
-    CounterButtonsComponent,
-    CustomCounterInputComponent,
     HomeComponent,
     HeaderComponent,
     PostListsComponent,
@@ -31,9 +27,12 @@ import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    ToastrModule.forRoot(),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
@@ -44,7 +43,11 @@ import { EditPostsComponent } from './posts/edit-posts/edit-posts.component';
     }),
     
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass:ErrorInterceptor,
+    multi:true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
